@@ -1,0 +1,66 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Réseau -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Compatibilité TV : l'écran tactile et le mode portrait ne sont PAS requis -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-feature android:name="android.software.leanback" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <!-- Fire TV : déclaré non requis pour rester installable partout,
+         mais documente la compatibilité Fire OS (Amazon Appstore) -->
+    <uses-feature android:name="amazon.hardware.fire_tv" android:required="false"/>
+    <uses-feature android:name="android.hardware.gamepad" android:required="false"/>
+
+    <application
+        android:label="Premium IPTV Player"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:banner="@drawable/tv_banner"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+        android:allowBackup="false"
+        android:largeHeap="true"
+        android:hardwareAccelerated="true">
+        <!-- allowBackup=false : empêche l'extraction des identifiants IPTV
+             via `adb backup` / sauvegarde cloud (sécurité).
+             largeHeap : marge pour le décodage vidéo + affiches sur
+             appareils TV à faible RAM. -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:supportsPictureInPicture="true"
+            android:resizeableActivity="true"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"/>
+
+            <!-- Lanceur Mobile -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <!-- Lanceur Android TV / Google TV / Fire TV -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2"/>
+    </application>
+</manifest>

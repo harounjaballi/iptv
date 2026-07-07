@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Configuration réseau explicite (remplace usesCleartextTraffic global) :
+  le HTTP en clair reste autorisé car la majorité des serveurs Xtream / M3U /
+  Stalker ne proposent que du http://, mais la politique est désormais
+  déclarée et auditable — exigence de qualité pour la revue Play Store.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>
