@@ -55,7 +55,7 @@ class AppTheme {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      cardTheme: CardTheme(
+    cardTheme: CardThemeData(
         clipBehavior: Clip.antiAlias,
         elevation: 0,
         color: isDark
