@@ -54,3 +54,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+dependency_overrides:
+  bonsoir: 5.1.11
